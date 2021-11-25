@@ -1,0 +1,423 @@
+/*
+/*
+/* GLOBAL STYLES */
+
+*,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: "Inter", sans-serif;
+  font-size: 10pt;
+  font-weight: 400;
+  user-select: none;
+  
+/*   min-height: calc(var(--profiles-panel-height) + var(--top-padding) * 2); */
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+  pointer-events: none;
+}
+
+.mobile-warning {
+  margin: 30px;
+  font-size: 3em;
+}
+
+:root {
+  --side-expand-btn-width: 50px;
+  --side-expand-btn-height: 70px;
+  --bottom-expand-btn-width: 100%;
+  --bottom-expand-btn-height: 2rem;
+
+  --font-size-1: 1rem;
+  --font-size-2: 0.9rem;
+  --font-size-3: 0.8rem;
+  --font-weight-1: 600;
+  --font-weight-2: 550;
+
+  --profile-icon-size: 40px;
+  --gallery-icon-size: 35px;
+  --expand-btn-icon-size: 1.75rem !important;
+  --gallery-btn-icon-size: 1.5rem !important;
+  
+  --top-height: 73vh;
+  --top-padding: 20px;
+  --profiles-panel-width: 300px;
+  --profiles-panel-height: 520px;
+  --right-panels-width: 500px;
+  --parameters-panel-height: 230px;
+  --panel-gap: 10px;
+  --slider-div-height: calc(100% - var(--side-expand-btn-height) - var(--panel-gap));
+  --projects-panel-height: 170px;
+  --projects-menus-width: 300px;
+  --projects-gallery-width: calc(100% - 100px);
+  --panel-padding: 1.1rem;
+
+  --dark-1: rgb(10, 10, 10);
+  --dark-2: rgb(50, 50, 50);
+  --dark-3: rgb(100, 100, 100);
+  --light-0: rgb(240, 240, 240);
+  --light-1: rgb(230, 230, 230);
+  --light-2: rgb(200, 200, 200);
+  --light-3: rgb(150, 150, 150);
+  --accent-1: #0055B3;
+  --accent-2: #003166;
+
+  --border-1: 1px solid var(--dark-1);
+  --border-2: 1px solid var(--light-3);
+  --border-3: 1px solid var(--light-2);
+  --border-radius-0: 8px;
+  --border-radius-1: 6px;
+  --border-radius-2: 4px;
+  --outline: -4px;
+
+  --input-transition: all 0.15s ease-in-out;
+  --panel-transition: all 0.25s ease-in-out;
+  --low-opacity: 0.6;
+}
+
+/*
+/*
+/* BUTTON IMAGES */
+
+.move-btn::before {
+  background-image: url("https://cdn.glitch.com/46c7c2ac-16b7-470f-9aa2-0be0b6ba2716%2Fmove.svg?v=1626070486926");
+}
+
+.edit-btn::before {
+  background-image: url("https://cdn.glitch.com/46c7c2ac-16b7-470f-9aa2-0be0b6ba2716%2Fcontrolpt.svg?v=1626069807192");
+}
+
+.add-btn::before {
+  background-image: url("https://cdn.glitch.com/46c7c2ac-16b7-470f-9aa2-0be0b6ba2716%2Fplusminsu.svg?v=1626674596561");
+}
+
+.flip-x-btn::before {
+  background-image: url("https://cdn.glitch.com/46c7c2ac-16b7-470f-9aa2-0be0b6ba2716%2Fflipx.svg?v=1626151859891");
+}
+
+.flip-y-btn::before {
+  background-image: url("https://cdn.glitch.com/46c7c2ac-16b7-470f-9aa2-0be0b6ba2716%2Fflipy.svg?v=1626151860663");
+}
+
+.profile-icon-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: local;
+  background-position: center;
+  background-size: 75%;
+  filter: opacity(0.6);
+}
+
+
+/*
+/*
+/* GENERAL BUTTON STYLES */
+
+input[type="file"] {
+  display: none;
+}
+
+button {
+  background: none;
+  border: none;
+}
+
+.side-expand-btn {
+  width: var(--side-expand-btn-width);
+  height: var(--side-expand-btn-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  color: var(--light-3);
+  cursor: pointer;
+  transition: var(--input-transition);
+}
+
+.side-expand-btn:hover {
+  color: var(--dark-1);
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+button.decrement,
+button.increment {
+  font-size: var(--font-size-2);
+  position: relative;
+  width: 1em;
+  height: 100%;
+  padding: 0.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  transition: var(--input-transition);
+}
+
+button.decrement:hover,
+button.increment:hover {
+  z-index: 99;
+}
+
+button.decrement {
+  border-radius: var(--border-radius-2) 0 0 var(--border-radius-2);
+  margin-right: -1px;
+}
+
+button.increment {
+  border-radius: 0 var(--border-radius-2) var(--border-radius-2) 0;
+  margin-left: -1px;
+}
+
+.material-icons,
+.material-icons-outlined {
+  position: absolute;
+  pointer-events: none;
+}
+
+.side-expand-btn .material-icons,
+.side-expand-btn .material-icons-outlined {
+  font-size: var(--expand-btn-icon-size);
+}
+
+/*
+/*
+/* GENERAL CONTAINER STYLES */
+
+#bottom-container {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  overflow: hidden;
+}
+
+#left-panels {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 20px 10px 20px 0;
+  pointer-events: none;
+}
+
+#right-panels {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: var(--top-height);
+  padding: 20px 0 20px 10px;
+  overflow: hidden;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel {
+  pointer-events: none;
+  transition: var(--panel-transition);
+}
+
+.panel-content,
+.panel-hang {
+  pointer-events: auto;
+}
+
+/*
+/*
+/* PAPER CANVAS STYLES */
+
+#paper-canvas-div {
+  /* position: relative; */
+  width: 100vw;
+  height: 100vh;
+
+}
+
+#paper-canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAAXNSR0IArs4c6QAAAB1JREFUGFdjZMACGPEKnjlz5r+JiQlYEX6VyMYAANEwBAbOfd82AAAAAElFTkSuQmCC)
+    repeat;
+/*   background: white; */
+}
+
+#paper-canvas.grab {
+  cursor: grabbing;
+}
+
+
+/*
+/*
+/* ALERT STYLES */
+
+#alert-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: var(--input-transition);
+  z-index: -99;
+}
+
+#alert-panel.active {
+  opacity: 1;
+  z-index: 99999999;
+}
+
+#alert-box {
+  position: relative;
+  width: 450px;
+  height: 300px;
+  padding: calc(var(--panel-padding) * 2);
+  background: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#alert-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#alert-icon {
+  position: relative;
+  width: 100%;
+  height: 60%;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 0;
+}
+
+#alert-icon span {
+  color: #cd0d30;
+}
+
+#alert-header {
+  position: relative;
+  font-size: 2rem;
+  font-weight: var(--font-weight-1);
+  padding-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#alert-error {
+  position: relative;
+  font-size: var(--font-size-2);
+  width: 100%;
+  padding: 1rem 0 2rem 0;
+  text-align: center;
+}
+
+#alert-error-type {
+  font-size: var(--font-size-2);
+  font-weight: var(--font-weight-1);
+}
+
+#alert-btns {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.alert-btn {
+  font-size: var(--font-size-2);
+  font-weight: var(--font-weight-2);
+  width: 40%;
+  padding: 0.8em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid;
+  border-radius: var(--border-radius-1);
+  cursor: pointer;
+  transition: var(--input-transition);
+}
+
+#import-retry-btn {
+  color: white;
+  background: #cd0d30;
+  border-color: #cd0d30;
+}
+
+#import-retry-btn:hover {
+  background: #f11c43;
+  border-color: #f11c43;
+}
+
+#import-cancel-btn {
+  color: var(--dark-3);
+  background: white;
+  border-color: var(--light-2); 
+}
+
+#import-cancel-btn:hover {
+  color: var(--dark-1);
+  border-color: var(--dark-1);
+}
+
+
+
+/*
+/*
+/* QOL STYLES */
+
+.error {
+  animation-name: error;
+  animation-duration: 225ms;
+}
+
+@keyframes error {
+  0% {
+    transform: translate(-2px, 0);
+  }
+  20% {
+    transform: translate(2px, 0);
+  }
+  40% {
+    transform: translate(-3px, 0);
+  }
+  80% {
+    transform: translate(3px, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}

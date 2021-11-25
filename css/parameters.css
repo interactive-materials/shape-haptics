@@ -1,0 +1,229 @@
+/*
+/*
+/* PARAMETERS PANEL STYLES */
+
+#parameters-panel {
+  position: relative;
+  right: calc(var(--right-panels-width) * -1);
+  width: calc(var(--right-panels-width) + var(--side-expand-btn-width));
+  height: var(--side-expand-btn-height);
+  flex-grow: 0;
+  display: flex;
+}
+
+#parameters-panel.active {
+  right: 0;
+  height: var(--parameters-panel-height);
+}
+
+#parameters-panel-hang {
+  position: relative;
+  width: var(--side-expand-btn-width);
+  height: var(--side-expand-btn-height);
+}
+
+#parameters-panel-hang .side-expand-btn {
+  position: relative;
+  border: var(--border-1);
+  border-right: none;
+  border-radius: var(--border-radius-1) 0 0 var(--border-radius-1);
+}
+
+
+#parameters-panel-content {
+  position: relative;
+  width: var(--right-panels-width);
+  height: var(--parameters-panel-height);
+  padding: var(--panel-padding);
+  background: white;
+  border: var(--border-1);
+  border-right: none;
+}
+
+#name-div {
+  height: 15%;
+  display: flex;
+  align-items: center;
+}
+
+#name-div label {
+  font-size: var(--font-size-1);
+  font-weight: var(--font-weight-1);
+  padding-right: 1.5em;
+  float: left;
+}
+
+#name-div input {
+  font-size: var(--font-size-2);
+  width: 50%;
+  height: 80%;
+  padding: 0.5em;
+  border: none;
+  border-bottom: var(--border-3);
+  text-align: left;
+  transition: var(--input-transition);
+}
+
+#name-div input:hover {
+  border-bottom: var(--border-1);
+}
+
+#parameters-div {
+  width: 100%;
+  height: 85%;
+  padding: calc(var(--panel-padding) * 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.parameters-column {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 100%;
+}
+
+.parameters-item {
+  flex-grow: 1;
+}
+
+.parameters-item h2 {
+  font-size: var(--font-size-2);
+  font-weight: var(--font-weight-1);
+  position: relative;
+}
+
+.parameters-content {
+  margin-top: 0.8em;
+}
+
+.parameters-content li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  text-decoration: none;
+  list-style: none;
+  height: 1.25em;
+}
+
+.parameters-content li:not(:first-child) {
+  margin-top: 0.4em;
+}
+
+.parameters-content li > label {
+  font-size: var(--font-size-3);
+  position: relative;
+  color: var(--dark-3);
+}
+
+.parameters-input:not(.toggle-input) {
+  display: flex;
+  width: 40%;
+  height: 100%;
+}
+
+.parameters-input.toggle-input {
+  display: flex;
+  justify-content: center;
+  transition: var(--input-transition);
+}
+
+.parameters-input button {
+  width: 0;
+  color: var(--dark-2);
+  background: none;
+  border: 1px solid var(--light-2);
+  opacity: 0;
+}
+
+.parameters-input button:hover {
+  color: white;
+  background: var(--dark-2);
+  border-color: var(--dark-2);
+}
+
+.parameters-input input[type="number"] {
+  font-size: var(--font-size-3);
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border: 1px solid var(--light-2);
+  text-align: center;
+  transition: var(--input-transition);
+}
+
+input[type="number"].no-edit {
+  background: var(--light-1);
+}
+
+.parameters-content li:hover label {
+  color: var(--dark-1);
+}
+
+.parameters-content li:hover input[type="number"]:not(.no-edit) {
+  width: 60%;
+}
+
+.parameters-content li:hover .parameters-input button {
+  width: 20%;
+  opacity: 1;
+}
+
+#param-spring-enable {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+#spring-parameters li:first-of-type {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle-input {
+  margin-right: 5px;
+}
+
+#spring-parameters li:first-of-type input + label {
+  position: relative;
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 2.5em;
+  height: 1em;
+  background: var(--light-3);
+  display: block;
+  border-radius: 100px;
+  transition: var(--input-transition);
+}
+
+#spring-parameters li:first-of-type input + label:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+  width: 1em;
+  height: 0.7em;
+  margin-left: 0.15em;
+  background: white;
+  border-radius: 100px;
+  transition: var(--input-transition);
+}
+
+#spring-parameters li:first-of-type input:checked + label {
+  background: var(--accent-1);
+}
+
+#spring-parameters li:first-of-type input:checked + label:after {
+  left: calc(100% - 1em - 0.3em);
+}
+
+#spring-parameters li:first-of-type input:not(:checked) + label:hover {
+  background: var(--dark-3);
+}
+
+#spring-parameters li:first-of-type input:checked + label:hover {
+  background: var(--accent-2);
+}

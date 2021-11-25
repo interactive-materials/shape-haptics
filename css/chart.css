@@ -1,0 +1,237 @@
+/*
+/*
+/* CHART PANEL STYLES */
+
+#chart-panel {
+  position: relative;
+  right: calc(var(--right-panels-width) * -1);
+  width: calc(var(--right-panels-width) + var(--side-expand-btn-width));
+  margin-top: var(--panel-gap);
+  display: flex;
+}
+
+#parameters-panel + #chart-panel {
+  height: calc(100% - var(--side-expand-btn-height) - var(--panel-gap) * 0.8);
+}
+
+#parameters-panel.active + #chart-panel {
+  height: calc(100% - var(--parameters-panel-height) - var(--panel-gap));
+}
+
+#chart-panel.active {
+  right: 0;
+}
+
+#chart-panel-hang {
+  position: relative;
+  width: var(--side-expand-btn-width);
+  /*   height: 100%; */
+  display: flex;
+  flex-direction: column;
+}
+
+#chart-panel .side-expand-btn {
+  position: relative;
+  border: var(--border-1);
+  border-right: none;
+  border-radius: var(--border-radius-1) 0 0 var(--border-radius-1);
+}
+
+#travel-slider-div {
+  position: relative;
+  width: var(--side-expand-btn-width);
+  margin-top: var(--panel-gap);
+  padding: 20px;
+  flex-grow: 1;
+  background: white;
+  border: var(--border-1);
+  border-right: none;
+  border-radius: var(--border-radius-1) 0 0 var(--border-radius-1);
+}
+
+#travel-slider {
+  -webkit-appearance: none;
+  position: relative;
+  height: 8px;
+  top: calc(5px * -0.5);
+  left: 50%;
+  transform: rotate(90deg) translateY(-50%);
+  transform-origin: top left;
+  background: var(--light-0);
+  border: 1px solid var(--light-3);
+  border-radius: 3px;
+}
+
+#travel-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  transform: rotate(90deg);
+  border-radius: 99px;
+  background: var(--dark-3);
+  overflow: visible;
+  cursor: pointer;
+}
+
+#travel-slider::-webkit-slider-thumb:hover {
+  background: var(--dark-1);
+}
+
+#chart-panel-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: var(--panel-padding);
+  display: flex;
+  background: white;
+  border: var(--border-1);
+  border-right: none;
+}
+
+#chart-div {
+  position: relative;
+  width: 85%;
+  height: 100%;
+  margin-right: var(--panel-padding);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#chart-legend {
+  position: relative;
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#legend-items-div {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 4em);
+  /*     background: var(--light-0); */
+  /*     border: 1px solid var(--light-3); */
+  border-radius: var(--border-radius-2);
+  overflow-y: overlay;
+}
+
+#legend-items-div::-webkit-scrollbar {
+  width: 5px;
+}
+
+#legend-items-div::-webkit-scrollbar-track {
+  position: absolute;
+  bottom: 0;
+  width: 5px;
+  border-radius: 999px;
+  background: lightgray;
+}
+
+#legend-items-div::-webkit-scrollbar-thumb {
+  /*   border: 4px solid white; */
+  border-radius: 10px;
+  background: grey;
+}
+
+#legend-items-div::-webkit-scrollbar-thumb:hover {
+  background: black;
+  background-clip: padding-box;
+}
+
+.legend-item {
+  position: relative;
+  width: 100%;
+  padding: 0.5em;
+  display: table;
+  table-layout: fixed;
+}
+
+.legend-item:nth-child(3) {
+  border-bottom: 1px dotted var(--light-2);
+}
+
+.legend-item div {
+  position: relative;
+  width: 10%;
+  height: 100%;
+  display: table-cell;
+}
+
+.legend-item h2 {
+  font-size: var(--font-size-3);
+  position: relative;
+  width: 90%;
+  padding-left: 1em;
+  display: table-cell;
+  overflow-wrap: break-word;
+}
+
+.legend-highlight h2 {
+  font-weight: var(--font-weight-1);
+}
+
+#deconstruct-btn {
+  font-size: var(--font-size-3);
+  position: relative;
+  width: 100%;
+  height: 4em;
+  padding: 0.5em;
+  color: white;
+  background: var(--dark-3);
+  border-radius: var(--border-radius-2);
+  cursor: pointer;
+  transition: var(--input-transition);
+}
+
+#deconstruct-btn:hover {
+  background: var(--dark-2);
+}
+
+#deconstruct-btn.active {
+  background: var(--accent-1);
+}
+
+#deconstruct-btn.active:hover {
+  background: var(--accent-2);
+}
+
+#chart-computing {
+  position: absolute;
+  width: 100%;
+  height: 85%;
+  top: 0;
+  left: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  z-index: 998;
+  opacity: 15%;
+}
+
+#chart-computing.active {
+/*   visibility: visible; */
+}
+
+#chart-computing span {
+  animation-duration: 2s;
+  animation-name: rotating;
+  animation-iteration-count: infinite;
+
+  font-size: 300% !important;
+}
+
+@keyframes rotating {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

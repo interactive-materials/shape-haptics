@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Haptic Coaster</title>
+
+    <meta name="description" content="Haptic Coaster Sandbox" />
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/profiles.css" />
+    <link rel="stylesheet" href="/css/parameters.css" />
+    <link rel="stylesheet" href="/css/chart.css" />
+    <link rel="stylesheet" href="/css/projects.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+
+    <!-- import the webpage's javascript file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.15/paper-full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.0/dist/chart.min.js"></script>
+
+    <script src="js/script.js" defer></script>
+    <script src="js/hapticproject.js" defer></script>
+    <script src="js/generator.js" defer></script>
+    <script src="js/interactions.js" defer></script>
+    <script src="js/menu.js" defer></script>
+    <script src="js/filehandler.js" defer></script>
+    <script src="js/drawchart.js" defer></script>
+    <script src="js/projectmanager.js" defer></script>
+    <script src="js/forcecalc.js" defer></script>
+  </head>
+  <body>
+    <div id="paper-canvas-div">
+      <canvas id="paper-canvas" resize></canvas>
+    </div>
+    <div id="left-panels">
+      <div id="profiles-panel" class="panel">
+        <div id="profiles-panel-content" class="panel-content">
+          <div id="profile-left" class="profile">
+            <div class="profile-header">
+              <h2>Left Profile</h2>
+            </div>
+            <div class="profile-content">
+              <div class="profile-tabs">
+                <button
+                  id="create-tab-left"
+                  class="profile-tab profile-tab-left"
+                  type="button"
+                >
+                  Create
+                </button>
+                <button
+                  id="import-tab-left"
+                  class="profile-tab profile-tab-left"
+                  type="button"
+                >
+                  Import
+                </button>
+                <button
+                  id="sym-tab-left"
+                  class="profile-tab profile-tab-left"
+                  type="button"
+                >
+                  Symmetrical
+                </button>
+              </div>
+              <div class="profile-menus">
+                <div
+                  id="create-menu-left"
+                  class="profile-menu profile-menu-left"
+                >
+                  <div class="profile-menu-tools">
+                    <div class="profile-menu-item edit-menu-item">
+                      <label>Edit Tools</label>
+                      <div class="profile-menu-inputs">
+                        <button
+                          id="move-pt-btn-left"
+                          class="create-btn move-btn profile-icon-btn"
+                          type="button"
+                        ></button>
+                        <button
+                          id="edit-pt-btn-left"
+                          class="create-btn edit-btn profile-icon-btn"
+                          type="button"
+                        ></button>
+                        <button
+                          id="add-pt-btn-left"
+                          class="create-btn add-btn profile-icon-btn"
+                          type="button"
+                        ></button>
+                      </div>
+                    </div>
+                    <div class="profile-menu-item clone-menu-item">
+                      <label>Clone from</label>
+                      <div class="profile-menu-inputs">
+                        <button
+                          id="clone-import-btn-left"
+                          class="clone-btn profile-text-btn"
+                          type="button"
+                        >
+                          Import
+                        </button>
+                        <button
+                          id="clone-sym-btn-left"
+                          class="clone-btn profile-text-btn"
+                          type="button"
+                        >
+                          Right
+                        </button>
+                      </div>
+                    </div>
+                    <div class="profile-menu-item width-menu-item">
+                      <label>Left Maximum Width</label>
+                      <div class="profile-menu-inputs">
+                        <button class="decrement" type="button">-</button>
+                        <input
+                          id="left-profile-width-create"
+                          type="number"
+                          min="0"
+                          step="0.1"
+                          max="4"
+                        />
+                        <button class="increment" type="button">+</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="profile-menu-tools">
+                    <div class="profile-menu-item clear-menu-item">
+                      <button
+                        id="clear-btn-left"
+                        class="clear-btn profile-text-btn"
+                        type="button"
+                      >
+                        Reset Points
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  id="import-menu-left"
+                  class="profile-menu profile-menu-left"
+                >
+                  <div class="profile-menu-tools">
+                    <div class="profile-menu-item import-menu-item">
+                      <label
+                        for="import-left"
+                        class="file-label profile-text-btn"
+                        >Import Left Profile</label
+                      >
+                      <input id="import-left" class="import-btn" type="file" />
+                    </div>
+                    <div class="profile-menu-item flip-menu-item">
+                      <label>Flip Tools</label>
+                      <div class="profile-menu-inputs">
+                        <button
+                          id="flip-x-left"
+                          class="flip-btn flip-x-btn profile-icon-btn"
+                          type="button"
+                        ></button>
+                        <button
+                          id="flip-y-left"
+                          class="flip-btn flip-y-btn profile-icon-btn"
+                          type="button"
+                        ></button>
+                      </div>
+                    </div>
+                    <div class="profile-menu-item width-menu-item">
+                      <label>Left Maximum Width</label>
+                      <div class="profile-menu-inputs">
+                        <button class="decrement" type="button">-</button>
+                        <input
+                          id="left-profile-width-import"
+                          type="number"
+                          min="0"
+                          step="0.1"
+                          max="4"
+                        />
+                        <button class="increment" type="button">+</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="sym-menu-left" class="profile-menu profile-menu-left">
+                  <div class="profile-menu-item sym-menu-item">
+                    <span
+                      >Left profile will be symmetrical to the right
+                      profile.</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="profile-right" class="profile">
+            <div class="profile-header">
+              <h2>Right Profile</h2>
+            </div>
+            <div class="profile-content">
+              <div class="profile-tabs">
+                <button
+                  id="create-tab-right"
+                  class="profile-tab profile-tab-right"
+                  type="button"
+                >
+                  Create
+                </button>
+                <button
+                  id="import-tab-right"
+                  class="profile-tab profile-tab-right"
+                  type="button"
+                >
+                  Import
+                </button>
+                <button
+                  id="sym-tab-right"
+                  class="profile-tab profile-tab-right"
+                  type="button"
+                >
+                  Symmetrical
+                </button>
+              </div>
+              <div class="profile-menus">
+                <div
+                  id="create-menu-right"
+                  class="profile-menu profile-menu-right"
+                >
+                  <div class="profile-menu-tools">
+                    <div class="profile-menu-item edit-menu-item">
+                      <label>Edit Tools</label>
+                      <div class="profile-menu-inputs">
+                        <button
+                          id="move-pt-btn-right"
+                          class="create-btn move-btn profile-icon-btn"
+                          type="button"
+                        ></button>
+                        <button
+                          id="edit-pt-btn-right"
+                          class="create-btn edit-btn profile-icon-btn"
+                          type="button"
+                        ></button>
+                        <button
+                          id="add-pt-btn-right"
+                          class="create-btn add-btn profile-icon-btn"
+                          type="button"
+                        ></button>
+                      </div>
+                    </div>
+                    <div class="profile-menu-item clone-menu-item">
+                      <label>Clone from</label>
+                      <div class="profile-menu-inputs">
+                        <button
+                          id="clone-import-btn-right"
+                          class="clone-btn profile-text-btn"
+                          type="button"
+                        >
+                          Import
+                        </button>
+                        <button
+                          id="clone-sym-btn-right"
+                          class="clone-btn profile-text-btn"
+                          type="button"
+                        >
+                          Left
+                        </button>
+                      </div>
+                    </div>
+                    <div class="profile-menu-item width-menu-item">
+                      <label>Right Maximum Width</label>
+                      <div class="profile-menu-inputs">
+                        <button class="decrement" type="button">-</button>
+                        <input
+                          id="right-profile-width-create"
+                          type="number"
+                          min="0"
+                          step="0.1"
+                          max="4"
+                        />
+                        <button class="increment" type="button">+</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="profile-menu-tools">
+                    <div class="profile-menu-item clear-menu-item">
+                      <button
+                        id="clear-btn-right"
+                        class="clear-btn profile-text-btn"
+                        type="button"
+                      >
+                        Reset Points
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  id="import-menu-right"
+                  class="profile-menu profile-menu-right"
+                >
+                  <div class="profile-menu-tools">
+                    <div class="profile-menu-item import-menu-item">
+                      <label
+                        for="import-right"
+                        class="file-label profile-text-btn"
+                        >Import Right Profile</label
+                      >
+                      <input id="import-right" class="import-btn" type="file" />
+                    </div>
+                    <div class="profile-menu-item flip-menu-item">
+                      <label>Flip Tools</label>
+                      <div class="profile-menu-inputs">
+                        <button
+                          id="flip-x-right"
+                          class="flip-btn flip-x-btn profile-icon-btn"
+                          type="button"
+                        ></button>
+                        <button
+                          id="flip-y-right"
+                          class="flip-btn flip-y-btn profile-icon-btn"
+                          type="button"
+                        ></button>
+                      </div>
+                    </div>
+                    <div class="profile-menu-item width-menu-item">
+                      <label>Right Maximum Width</label>
+                      <div class="profile-menu-inputs">
+                        <button class="decrement" type="button">-</button>
+                        <input
+                          id="right-profile-width-import"
+                          type="number"
+                          min="0"
+                          step="0.1"
+                          max="4"
+                        />
+                        <button class="increment" type="button">+</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  id="sym-menu-right"
+                  class="profile-menu profile-menu-right"
+                >
+                  <div class="profile-menu-item sym-menu-item">
+                    <span
+                      >Right profile will be symmetrical to the left
+                      profile.</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="profiles-panel-hang" class="panel-hang">
+          <div class="side-expand-btn">
+            <span class="material-icons">edit</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="right-panels">
+      <div id="parameters-panel" class="panel">
+        <div id="parameters-panel-hang" class="panel-hang">
+          <div class="side-expand-btn">
+            <span class="material-icons">settings</span>
+          </div>
+        </div>
+        <div id="parameters-panel-content" class="panel-content">
+          <div id="name-div">
+            <label>Project Name</label>
+            <input id="param-name" type="text" />
+          </div>
+          <div id="parameters-div">
+            <div class="parameters-column">
+              <div id="spring-parameters" class="parameters-item">
+                <h2>Base Spring (mm)</h2>
+                <div class="parameters-content">
+                  <li>
+                    <label>Enable Spring</label>
+                    <div class="parameters-input toggle-input">
+                      <input
+                        id="param-spring-enable"
+                        class="parameter"
+                        type="checkbox"
+                        checked="checked"
+                      />
+                      <label for="param-spring-enable"></label>
+                    </div>
+                  </li>
+                  <li>
+                    <label>Height</label>
+                    <div class="parameters-input">
+                      <button class="decrement">-</button>
+                      <input
+                        id="param-spring-height"
+                        class="parameter"
+                        type="number"
+                        min="10"
+                        step="1"
+                      />
+                      <button class="increment">+</button>
+                    </div>
+                  </li>
+                  <li>
+                    <label>Width</label>
+                    <div class="parameters-input">
+                      <button class="decrement">-</button>
+                      <input
+                        id="param-spring-width"
+                        class="parameter"
+                        type="number"
+                        min="16"
+                        max="24"
+                        step="1"
+                      />
+                      <button class="increment">+</button>
+                    </div>
+                  </li>
+                  <li>
+                    <label>Count</label>
+                    <div class="parameters-input">
+                      <button class="decrement">-</button>
+                      <input
+                        id="param-spring-count"
+                        class="parameter"
+                        type="number"
+                        min="1"
+                        step="1"
+                      />
+                      <button class="increment">+</button>
+                    </div>
+                  </li>
+                  <li>
+                    <label>Thickness</label>
+                    <div class="parameters-input">
+                      <button class="decrement">-</button>
+                      <input
+                        id="param-spring-thickness"
+                        class="parameter"
+                        type="number"
+                        min="1"
+                        step="0.1"
+                        max="1.8"
+                      />
+                      <button class="increment">+</button>
+                    </div>
+                  </li>
+                  <li>
+                    <label>Total Travel</label>
+                    <div class="parameters-input">
+                      <input
+                        id="param-spring-travel"
+                        class="parameter no-edit"
+                        type="number"
+                        min="0.1"
+                        step="0.1"
+                        disabled
+                      />
+                    </div>
+                  </li>
+                </div>
+              </div>
+            </div>
+            <div class="parameters-column">
+              <div id="side-parameters" class="parameters-item">
+                <h2>Side Spring (mm)</h2>
+                <div class="parameters-content">
+                  <li>
+                    <label>Thickness</label>
+                    <div class="parameters-input">
+                      <button class="decrement">-</button>
+                      <input
+                        id="param-side-thickness"
+                        class="parameter"
+                        type="number"
+                        min="1.0"
+                        step="0.1"
+                        max="1.8"
+                      />
+                      <button class="increment">+</button>
+                    </div>
+                  </li>
+                </div>
+              </div>
+              <div id="slider-parameters" class="parameters-item">
+                <h2>Slider (mm)</h2>
+                <div class="parameters-content">
+                  <li>
+                    <label>Travel</label>
+                    <div class="parameters-input">
+                      <button class="decrement">-</button>
+                      <input
+                        id="param-slider-travel"
+                        class="parameter"
+                        type="number"
+                        min="1"
+                        step="0.1"
+                      />
+                      <button class="increment">+</button>
+                    </div>
+                  </li>
+                  <li>
+                    <label>Preload Base</label>
+                    <div class="parameters-input">
+                      <button class="decrement">-</button>
+                      <input
+                        id="param-slider-preloadbase"
+                        class="parameter"
+                        type="number"
+                        min="0"
+                        step="0.1"
+                      />
+                      <button class="increment">+</button>
+                    </div>
+                  </li>
+                  <li>
+                    <label>Preload Side</label>
+                    <div class="parameters-input">
+                      <button class="decrement">-</button>
+                      <input
+                        id="param-slider-preloadside"
+                        class="parameter"
+                        type="number"
+                        min="0"
+                        step="0.1"
+                      />
+                      <button class="increment">+</button>
+                    </div>
+                  </li>
+                </div>
+              </div>
+            </div>
+            <div class="parameters-column">
+              <div id="case-parameters" class="parameters-item">
+                <h2>Case (mm)</h2>
+                <div class="parameters-content">
+                  <li>
+                    <label>Spring Width</label>
+                    <div class="parameters-input">
+                      <button class="decrement">-</button>
+                      <input
+                        id="param-case-springwidth"
+                        class="parameter"
+                        type="number"
+                        min="1"
+                        step="1"
+                      />
+                      <button class="increment">+</button>
+                    </div>
+                  </li>
+                  <li>
+                    <label>Top Buffer</label>
+                    <div class="parameters-input">
+                      <button class="decrement">-</button>
+                      <input
+                        id="param-case-topbuffer"
+                        class="parameter"
+                        type="number"
+                        min="2"
+                        step="0.1"
+                      />
+                      <button class="increment">+</button>
+                    </div>
+                  </li>
+                  <li>
+                    <label>Base Buffer</label>
+                    <div class="parameters-input">
+                      <button class="decrement">-</button>
+                      <input
+                        id="param-case-basebuffer"
+                        class="parameter"
+                        type="number"
+                        min="1"
+                        step="1"
+                      />
+                      <button class="increment">+</button>
+                    </div>
+                  </li>
+                  <li>
+                    <label>Wall</label>
+                    <div class="parameters-input">
+                      <button class="decrement">-</button>
+                      <input
+                        id="param-case-wall"
+                        class="parameter"
+                        type="number"
+                        min="1"
+                        step="1"
+                      />
+                      <button class="increment">+</button>
+                    </div>
+                  </li>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chart-panel" class="panel">
+        <div id="chart-panel-hang" class="panel-hang">
+          <div class="side-expand-btn">
+            <span class="material-icons">timeline</span>
+          </div>
+          <div id="travel-slider-div">
+            <input
+              type="range"
+              id="travel-slider"
+              min="0"
+              max="40"
+              step="1"
+              value="0"
+            />
+            <div id="travel-slider-thumb">
+              <div id="travel-slider-tooltip"></div>
+            </div>
+          </div>
+        </div>
+        <div id="chart-panel-content" class="panel-content">
+          <div id="chart-div">
+            <div id="chart-computing" class="">
+              <span class="material-icons-outlined">hourglass_empty</span>
+            </div>
+            <canvas id="chart" resize></canvas>
+          </div>
+          <div id="chart-legend">
+            <div id="legend-items-div"></div>
+            <button id="deconstruct-btn" class="chart-text-btn" type="button">
+              Deconstruct Active Profile
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="bottom-container">
+      <div id="projects-panel" class="panel active">
+        <div id="projects-panel-hang" class="panel-hang">
+          <div class="bottom-expand-btn">
+            <span class="material-icons">expand_less</span>
+          </div>
+        </div>
+        <div id="projects-panel-content" class="panel-content">
+          <div id="projects-menus">
+            <div id="projects-init-menu" class="projects-menu active">
+              <button
+                id="new-btn"
+                class="projects-menu-item projects-text-btn"
+                type="button"
+              >
+                New Project
+              </button>
+              <div class="projects-menu-item">
+                <label
+                  for="load-archive-btn"
+                  class="file-label projects-text-btn"
+                  >Import Project Archive</label
+                >
+                <input id="load-archive-btn" class="import-btn" type="file" />
+              </div>
+              <button
+                id="export-archive-btn"
+                class="projects-menu-item projects-text-btn"
+                type="button"
+              >
+                Export Project Archive
+              </button>
+            </div>
+            <div id="projects-sides-menu" class="projects-menu">
+              <button
+                id="new-double-btn"
+                class="projects-text-btn"
+                type="button"
+              >
+                Double-Sided Project
+              </button>
+              <button
+                id="new-single-btn"
+                class="projects-text-btn"
+                type="button"
+              >
+                Single-Sided Project
+              </button>
+              <button
+                id="new-cancel-btn"
+                class="projects-text-btn"
+                type="button"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+          <div id="projects-gallery"></div>
+        </div>
+      </div>
+    </div>
+    <div id="alert-panel" class="">
+      <div id="alert-box">
+        <div id="alert-body">
+          <div id="alert-icon">
+            <span class="material-icons-outlined">close</span>
+          </div>
+          <div id="alert-header">Try Again!</div>
+          <div id="alert-error"></div>
+          <div id="alert-btns">
+            <button id="import-cancel-btn" class="alert-btn" type="button">
+              Cancel
+            </button>
+            <label
+              for="import-retry"
+              id="import-retry-btn"
+              class="file-label alert-btn"
+              >Import Again</label
+            >
+            <input id="import-retry" class="import-btn" type="file" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
